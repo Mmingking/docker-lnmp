@@ -10,8 +10,8 @@ docker_lnmpr
 ├── nginx
 │   ├── Dockerfile
 │   ├── nginx.conf
-│   └── vhost
-│       └── www.texixi.com.conf
+│   ├── vhosts ───  host.conf
+│ 	└── upstream ───  upstream.conf
 ├── php
 │   ├── Dockerfile
 │   ├── composer.phar
@@ -19,7 +19,7 @@ docker_lnmpr
 │   ├── php.ini
 │   ├── redis-3.0.0.tgz
 └── redis
-    └── Dockerfile
+    ├── Dockerfile
     └── redis.conf
 ```
 
@@ -35,15 +35,15 @@ docker build -t centos/redis:v4.0 ./redis
 docker network create --subnet=172.171.0.0/16 docker-at
 
 # run
-docker run --name mysql56  --restart=always --net docker-at --ip 172.171.0.9 -d -p 3306:3306 -v /data/mysql:/var/lib/mysql -v /data/logs/mysql:/var/log/mysql -v /data/run/mysqld:/var/run/mysqld  -e MYSQL_ROOT_PASSWORD=123456 -it centos/mysql:v5.6
+docker run --name mysq5.6  --restart=always --net docker-at --ip 172.171.0.9 -d -p 3306:3306 -v /data/mysql:/var/lib/mysql -v /data/logs/mysql:/var/log/mysql -v /data/run/mysqld:/var/run/mysqld  -e MYSQL_ROOT_PASSWORD=123456 -it centos/mysql:v5.6
 
-docker run --name mysql57 --restart=always --net docker-at --ip 172.171.0.9 -d -p 3306:3306 -v /data/mysql:/var/lib/mysql -v /data/logs/mysql:/var/log/mysql -v /data/run/mysqld:/var/run/mysqld  -e MYSQL_ROOT_PASSWORD=123456 -it centos/mysql:v5.7
+docker run --name mysq5.7 --restart=always --net docker-at --ip 172.171.0.9 -d -p 3306:3306 -v /data/mysql:/var/lib/mysql -v /data/logs/mysql:/var/log/mysql -v /data/run/mysqld:/var/run/mysqld  -e MYSQL_ROOT_PASSWORD=123456 -it centos/mysql:v5.7
 
 
-docker run --name redis326 --restart=always --net docker-at --ip 172.171.0.10 -d -p 6379:6379  -v /data:/data -it centos/redis:v3.2.6
+docker run --name redis4 --restart=always --net docker-at --ip 172.171.0.10 -d -p 6379:6379  -v /data:/data -it centos/redis:v3.2.6
 
 docker run --name php7 --restart=always --net docker-at --ip 172.171.0.8 -d -p 9000:9000 -v /www:/www -v /data/php:/data --link mysql56:mysql56 --link redis326:redis326 -it centos/php:v7.0.12 
-docker run --name nginx1121 --restart=always --net docker-at --ip 172.171.0.7 -p 80:80 -d -v /www:/www -v /data/nginx:/data --link php7:php7 -it centos/nginx:v1.12.1 
+docker run --name nginx1.12 --restart=always --net docker-at --ip 172.171.0.7 -p 80:80 -d -v /www:/www -v /data/nginx:/data --link php7:php7 -it centos/nginx:v1.12.1 
 
 
 
