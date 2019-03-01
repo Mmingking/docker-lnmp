@@ -5,7 +5,7 @@ mysql:
     volumes:
       - /data/mysql:/var/lib/mysql
       - /data/log/mysql:/var/log/mysql
-      - /data/run/mysqlmysqld:/var/run/mysqld
+      - /data/run/mysql/mysqld:/var/run/mysqld
 
     environment:
       MYSQL_ROOT_PASSWORD: 123456

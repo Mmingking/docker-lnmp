@@ -1,8 +1,9 @@
-FROM centos:7
+FROM registry.cn-hangzhou.aliyuncs.com/kingjjm/centos:aliyun 
 MAINTAINER kingjjm
 
 ENV TZ "Asia/Shanghai"
-
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN echo 'Asia/Shanghai' >/etc/timezone
 
 RUN yum -y install epel-release && \
     yum -y update 

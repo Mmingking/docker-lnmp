@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos7:aliyun
 MAINTAINER kingjjm 
 
 ENV TZ "Asia/Shanghai"
@@ -28,8 +28,6 @@ RUN yum -y update && \
       make && \
       make install && \
       cd /tmp && \
-      unzip swoole-src-1.9.21.zip && \
-      cd swoole-src-1.9.21 && \
       /usr/local/php/bin/phpize  && \
       ./configure --with-php-config=/usr/local/php/bin/php-config && \
       make && \
